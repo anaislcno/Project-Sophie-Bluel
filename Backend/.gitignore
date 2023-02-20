@@ -1,0 +1,7 @@
+node_modules
+
+!images/.gitkeep
+
+.vs_code
+
+.DS_STORE
