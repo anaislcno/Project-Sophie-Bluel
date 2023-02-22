@@ -23,36 +23,46 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
+
 ol, ul {
 	list-style: none;
 }
+
 blockquote, q {
 	quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
+
 body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -62,7 +72,7 @@ section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -84,12 +94,15 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+/* Nav bar */
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -98,13 +111,23 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+/* Introduction */
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -114,6 +137,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -121,10 +145,47 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+/* Filters */
+
+#filter {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+.btn {
+	font-family: 'Syne';
+	font-size: 16px;
+	background-color: white;
+	color: #1D6154;
+	border: 1px solid #1D6154;
+    border-radius: 60px;
+    padding: 10px 30px;
+    /* display: inline-block; */
+    margin: 20px 0px 40px 0px;
+}
+
+.btn:hover {
+	cursor: pointer;
+}
+
+.active {
+	background-color: #1D6154;
+	color: white;
+}
+
+/* Gallery */
+
+figcaption {
+	margin: 10px 0px 10px 0px;
+}
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -137,17 +198,22 @@ li:hover {
 	width: 100%;
 
 }
+
+/* Form */
+
 #contact {
 	width: 50%;
 margin: auto;
 }
+
 #contact > * {
 	text-align: center;
-
 }
+
 #contact h2{
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
 	margin-top:30px;
@@ -161,9 +227,11 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -180,9 +248,10 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+/* Footer */
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
-

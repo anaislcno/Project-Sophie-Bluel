@@ -21,7 +21,7 @@ function generateWorks(works){
     
         // On rattache la balise article a la div 
         divGallery.appendChild(worksElement);
-        // On rattache l’image à la balise article
+        // On rattache l’image à la figure
         worksElement.appendChild(imageUrlElement);
         worksElement.appendChild(titleElement);
     }
@@ -29,3 +29,50 @@ function generateWorks(works){
 
 // Premier affichage de la page 
 generateWorks(works);
+
+// Filtres
+
+// Filtre : Tous 
+
+const buttonAll = document.querySelector("#btn-all");
+
+buttonAll.addEventListener("click", function() {
+    document.querySelector(".gallery").innerHTML = "";
+    generateWorks(works);
+})
+
+// Filtre : Objects
+
+const buttonObjects = document.querySelector("#btn-object");
+
+buttonObjects.addEventListener("click", function () {
+    const worksObjectsFilter = works.filter(function (work) {
+        return work.category.name === "Objets";
+    });
+    document.querySelector(".gallery").innerHTML = "";
+    generateWorks(worksObjectsFilter)
+});
+
+// Filtre : Appartements 
+
+const buttonAppart = document.querySelector("#btn-apt");
+
+buttonAppart.addEventListener("click", function () {
+    const worksAppartFilter = works.filter(function (work) {
+        return work.category.name === "Appartements";
+    });
+    document.querySelector(".gallery").innerHTML = "";
+    generateWorks(worksAppartFilter)
+});
+
+// Filtre : Hôtels/Restaurants
+
+const buttonHotel = document.querySelector("#btn-hotels");
+
+buttonHotel.addEventListener("click", function () {
+    const worksHotelFilter = works.filter(function (work) {
+        return work.category.name === "Hotels & restaurants";
+    });
+    document.querySelector(".gallery").innerHTML = "";
+    generateWorks(worksHotelFilter)
+});
