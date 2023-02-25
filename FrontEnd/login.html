@@ -28,11 +28,38 @@
       </nav>
     </header>
     <main>
-      <section id="">
-        <article>
-          <h2>Log In</h2>
-          <br />
-          <p>Bientôt la connexion !</p>
+      <section id="login">
+        <h2>Log In</h2>
+        <br />
+        <article id="form">
+          <form method="get" action="">
+            <div class="form-all">
+              <div class="form-column">
+                <label for="mail">E-mail</label>
+                <input
+                  class="input-shape"
+                  type="email"
+                  name="mail"
+                  id="mail"
+                  required
+                />
+              </div>
+              <div class="form-column">
+                <label for="pass">Mot de passe</label>
+                <input
+                  class="input-shape"
+                  type="password"
+                  name="password"
+                  id="pass"
+                  required
+                />
+              </div>
+              <div id="form-center">
+                <input type="submit" value="Se connecter" class="cta" />
+                <p id="forgot">Mot de passe oublié</p>
+              </div>
+            </div>
+          </form>
         </article>
       </section>
     </main>
