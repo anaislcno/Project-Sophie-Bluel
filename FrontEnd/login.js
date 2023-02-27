@@ -21,33 +21,23 @@ loginForm.addEventListener("submit", async function (event) {
   })
     .then((result) => {
       if (result.status != 200) {
-        // On sécurise les codes différent de 200 en quittant la function : return
-        console.log("La requête nest pas validée");
+        // On sécurise les codes différents de 200 en quittant la function avec return
+        console.log("La requête n'est pas validée");
+        document.getElementById("err").innerHTML =
+          "La combinaison utilisateur / mot de passe est fausse";
+        document.getElementById("err").style.display = "block";
         return;
       }
 
       // Status est forcémment == 200
       console.log(
-        "Bravo tu as réussi ta requete, tu peux récupérer tes données"
+        "Bravo tu as réussi ta requête, tu peux récupérer tes données"
       );
+      // Redirection vers la page d'acceuil en cas de succès
       window.location = "index.html";
     })
     .catch((error) => {
-      // si ta requête n'a pas eu de retour
-      console.log("il ya eu un problème dans la requête", error);
+      // Si la requête ne fonctionne pas
+      console.log("Il ya eu un problème dans la requête", error);
     });
-
-  // const result = await fetch("http://localhost:5678/api/users/login", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: loginInfo,
-  //   })
-
-  //   if (result.status == 200) {
-  //     console.log('Bravo ça a marché !!');
-  //   } else {
-  //     console.log('Oh non cest raté');
-  //   }
 });
