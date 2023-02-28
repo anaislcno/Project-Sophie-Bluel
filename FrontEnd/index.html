@@ -68,9 +68,23 @@
       </section>
       <section id="portfolio">
         <h2>Mes Projets</h2>
-        <button class="btn-modif">
-          <i class="fa-regular fa-pen-to-square"></i>Modifier
-        </button>
+        <a href="#modal1" class="js-modal"
+          ><button id="btn-modal" class="btn-modif">
+            <i class="fa-regular fa-pen-to-square"></i>Modifier
+          </button></a
+        >
+        <aside id="modal1" class="modal" role="dialog">
+          <div class="modal-wrapper">
+            <span class="close">&times;</span>
+            <h3>Galerie photo</h3>
+            <button class="cta">Ajouter une photo</button>
+            <div id="edit-gallery">
+              <p>Future grid</p>
+            </div>
+            <p>Supprimer la galerie</p>
+          </div>
+        </aside>
+
         <div id="filter">
           <button class="btn active" id="btn-all">Tous</button>
           <button class="btn" id="btn-object">Objets</button>

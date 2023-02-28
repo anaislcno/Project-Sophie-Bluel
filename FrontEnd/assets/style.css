@@ -364,7 +364,49 @@ footer nav ul {
 }
 
 #portfolio .btn-modif {
-	position: absolute;
+	/* position: absolute; */
     right: 525px;
     top: 631px;
+}
+
+/* Modale  */
+
+.modal h3 {
+	font-size: 26px;
+}
+
+.modal p {
+	font-size: 14px;
+	color: #D65353;
+}
+
+.modal {
+	display: none;
+	box-sizing: border-box;
+	position: fixed;
+	/* display: flex; */
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-wrapper {
+	background-color: white;
+	border-radius: 10px;
+	width: 630px;
+	/* max-width: calc(100vw - 20px);
+	max-height: calc(100vw - 20px); */
+	padding: 20px;
+	text-align: center;
+}
+
+.close {
+	float: right;
+	cursor: pointer;
+	font-size: 25px;
+	margin-right: 5px;
 }
