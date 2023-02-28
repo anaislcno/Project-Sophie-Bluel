@@ -81,7 +81,7 @@ buttonHotel.addEventListener("click", function () {
 
 const modal = document.getElementById("modal1");
 const buttonModal = document.getElementById("btn-modal");
-const closeModal = document.getElementsByClassName("close")[0];
+const closeModal = document.getElementById("close");
 
 //  Apparition de la modale qd on clique s/ le bouton
 
@@ -102,3 +102,33 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
+
+//La modale se ferme avec esc
+
+window.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    modal.style.display = "none";
+  }
+});
+
+function enableEditingMode() {
+  const token = window.localStorage.getItem("accessToken");
+
+  if (token == null) {
+    // user pas connecté
+    console.log("Vous devez vous connecter d'abord");
+  } else {
+    // le user est connecté
+    console.log("Vous êtes connecté !");
+
+    document.getElementById("edition-mode").style.display = "flex";
+
+    Array.from(document.getElementsByClassName("btn-modif")).forEach(function (
+      element
+    ) {
+      element.style.display = "block";
+    });
+  }
+}
+
+enableEditingMode();

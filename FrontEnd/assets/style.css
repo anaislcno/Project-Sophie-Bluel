@@ -64,7 +64,7 @@ body {
 	background-color: #FFFEF8;
 }
 
-#nav-bar {
+.nav-bar {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
@@ -314,8 +314,8 @@ footer nav ul {
 /* Edition mode  */
 
 #edition-mode {
-	/* display: none; */
-	display: flex;
+	display: none;
+	/* display: flex; */
 	justify-content: center;
 	align-items: baseline;
 	gap: 15px;
@@ -348,7 +348,7 @@ footer nav ul {
 /* Button edition mode  */
 
 .btn-modif {
-	/* display: none; */
+	display: none;
 	font-family: 'Work Sans';
 	border: none;
 	background-color: #FFFEF8;
@@ -364,7 +364,7 @@ footer nav ul {
 }
 
 #portfolio .btn-modif {
-	/* position: absolute; */
+	position: absolute;
     right: 525px;
     top: 631px;
 }
@@ -404,7 +404,7 @@ footer nav ul {
 	text-align: center;
 }
 
-.close {
+#close {
 	float: right;
 	cursor: pointer;
 	font-size: 25px;

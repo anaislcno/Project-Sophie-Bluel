@@ -19,7 +19,7 @@ loginForm.addEventListener("submit", async function (event) {
     },
     body: loginInfo,
   })
-    .then((result) => {
+    .then(async (result) => {
       if (result.status != 200) {
         // On sécurise les codes différents de 200 en quittant la function avec return
         console.log("La requête n'est pas validée");
@@ -33,6 +33,12 @@ loginForm.addEventListener("submit", async function (event) {
       console.log(
         "Bravo tu as réussi ta requête, tu peux récupérer tes données"
       );
+
+      const jsonResponse = await result.json(); // tu récupére les données de la réponse
+
+      //tu stock le token dans le localstorage
+      window.localStorage.setItem("accessToken", jsonResponse.token);
+
       // Redirection vers la page d'acceuil en cas de succès
       window.location = "index.html";
     })
