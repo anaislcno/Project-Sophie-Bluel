@@ -61,9 +61,10 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #FFFEF8;
 }
 
-header {
+#nav-bar {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
@@ -115,12 +116,6 @@ li:hover {
 a {
 	text-decoration: none;
 	color: black;
-}
-
-/* Personnals basics  */
-
-body {
-	background-color: #FFFEF8;
 }
 
 /* Introduction */
@@ -311,7 +306,65 @@ footer nav ul {
 
 #err {
 	display: none;
-	border: 1px solid #b1463c;
+	color: #b1463c;
 	padding: 5px;
 	margin: 5px;
+}
+
+/* Edition mode  */
+
+#edition-mode {
+	/* display: none; */
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+	gap: 15px;
+	color: white;
+	background-color: black;
+	height: 60px;
+	min-width: 1440px;
+	margin-left: -150px;
+}
+
+#edition-mode .fa-pen-to-square {
+	margin-right: 5px;
+	font-size: 16px;
+}
+
+.cta-edition {
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+	cursor: pointer;
+	background-color: white;
+	color: black;
+	border: 1px solid white;
+	border-radius: 60px;
+	padding: 10px 10px;
+	width: 216px;
+	height: 40px;
+	margin: 10px 0px 0px 0px;
+}
+
+/* Button edition mode  */
+
+.btn-modif {
+	/* display: none; */
+	font-family: 'Work Sans';
+	border: none;
+	background-color: #FFFEF8;
+	cursor: pointer;
+}
+
+.btn-modif .fa-pen-to-square {
+	margin-right: 5px;
+}
+
+#introduction .btn-modif {
+	margin: 10px 0px 0px 50px;
+}
+
+#portfolio .btn-modif {
+	position: absolute;
+    right: 525px;
+    top: 631px;
 }

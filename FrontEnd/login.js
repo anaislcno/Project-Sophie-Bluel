@@ -24,7 +24,7 @@ loginForm.addEventListener("submit", async function (event) {
         // On sécurise les codes différents de 200 en quittant la function avec return
         console.log("La requête n'est pas validée");
         document.getElementById("err").innerHTML =
-          "La combinaison utilisateur / mot de passe est fausse";
+          "Erreur dans l'identifiant ou le mot de passe";
         document.getElementById("err").style.display = "block";
         return;
       }

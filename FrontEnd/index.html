@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Sophie Bluel - Architecte d'intérieur</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,25 +12,40 @@
     />
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
+    <!-- FontAwesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/d3776c0161.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Sophie Bluel - Architecte d'intérieur</title>
   </head>
   <body>
     <header>
-      <a href="index.html"
-        ><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a
-      >
-      <nav>
-        <ul>
-          <a href="index.html#portfolio"><li>projets</li></a>
-          <a href="index.html#contact"><li>contact</li></a>
-          <a href="login.html"><li>login</li></a>
-          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
-        </ul>
-      </nav>
+      <div id="edition-mode">
+        <p><i class="fa-regular fa-pen-to-square"></i>Mode édition</p>
+        <button class="cta-edition">publier les changements</button>
+      </div>
+      <div id="nav-bar">
+        <a href="index.html"
+          ><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a
+        >
+        <nav>
+          <ul>
+            <a href="index.html#portfolio"><li>projets</li></a>
+            <a href="index.html#contact"><li>contact</li></a>
+            <a href="login.html"><li>login</li></a>
+            <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+          </ul>
+        </nav>
+      </div>
     </header>
     <main>
       <section id="introduction">
         <figure>
           <img src="./assets/images/sophie-bluel.png" alt="" />
+          <button class="btn-modif">
+            <i class="fa-regular fa-pen-to-square"></i>Modifier
+          </button>
         </figure>
         <article>
           <h2>Designer d'espace</h2>
@@ -53,6 +68,9 @@
       </section>
       <section id="portfolio">
         <h2>Mes Projets</h2>
+        <button class="btn-modif">
+          <i class="fa-regular fa-pen-to-square"></i>Modifier
+        </button>
         <div id="filter">
           <button class="btn active" id="btn-all">Tous</button>
           <button class="btn" id="btn-object">Objets</button>
