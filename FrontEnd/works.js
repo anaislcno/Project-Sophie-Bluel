@@ -128,6 +128,15 @@ function enableEditingMode() {
     ) {
       element.style.display = "block";
     });
+
+    document.getElementById("nav-login").style.display = "none";
+    document.getElementById("nav-logout").style.display = "flex";
+
+    const logout = document.getElementById("nav-logout");
+
+    logout.onclick = function () {
+      window.localStorage.clear("accessToken");
+    };
   }
 }
 

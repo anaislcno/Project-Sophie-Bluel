@@ -271,6 +271,10 @@ footer nav ul {
 	margin-top: 100px;
 }
 
+#nav-logout {
+	display: none;
+}
+
 .cta {
 	font-family: 'Syne';
 	font-size: 14px;
