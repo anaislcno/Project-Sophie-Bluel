@@ -2,6 +2,7 @@ const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
 
 // Fonction qui génère toute la page web
+
 function generateWorks(works) {
   // Boucle pour tous les éléments
   for (let i = 0; i < works.length; i++) {
@@ -32,7 +33,6 @@ generateWorks(works);
 // Filtres
 
 // Filtre : Tous
-
 const buttonAll = document.querySelector("#btn-all");
 
 buttonAll.addEventListener("click", function () {
@@ -41,7 +41,6 @@ buttonAll.addEventListener("click", function () {
 });
 
 // Filtre : Objects
-
 const buttonObjects = document.querySelector("#btn-object");
 
 buttonObjects.addEventListener("click", function () {
@@ -53,7 +52,6 @@ buttonObjects.addEventListener("click", function () {
 });
 
 // Filtre : Appartements
-
 const buttonAppart = document.querySelector("#btn-apt");
 
 buttonAppart.addEventListener("click", function () {
@@ -65,7 +63,6 @@ buttonAppart.addEventListener("click", function () {
 });
 
 // Filtre : Hôtels/Restaurants
-
 const buttonHotel = document.querySelector("#btn-hotels");
 
 buttonHotel.addEventListener("click", function () {
@@ -76,27 +73,40 @@ buttonHotel.addEventListener("click", function () {
   generateWorks(worksHotelFilter);
 });
 
-// MODALE --> Mise en place
-// Déclaration des const pour ouvrir/fermer la modale
+// Highlight sur le filtre sélectionné
 
+let buttonFilters = document.getElementById("filter");
+let buttonHighlight = buttonFilters.getElementsByClassName("btn");
+
+for (let i = 0; i < buttonHighlight.length; i++) {
+  buttonHighlight[i].addEventListener("click", function () {
+    let buttonSelected = document.getElementsByClassName("active");
+    buttonSelected[0].className = buttonSelected[0].className.replace(
+      " active",
+      ""
+    );
+    this.className += " active";
+  });
+}
+
+// MODALE --> Mise en place
+
+// Déclaration des const pour ouvrir/fermer la modale
 const modal = document.getElementById("modal1");
 const buttonModal = document.getElementById("btn-modal");
 const closeModal = document.getElementById("close");
 
 //  Apparition de la modale qd on clique s/ le bouton
-
 buttonModal.onclick = function () {
   modal.style.display = "flex";
 };
 
 //La modale se ferme si on clique sur la croix
-
 closeModal.onclick = function () {
   modal.style.display = "none";
 };
 
 // La modale se ferme si on clique en dehors
-
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
@@ -104,21 +114,22 @@ window.onclick = function (event) {
 };
 
 //La modale se ferme avec esc
-
 window.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     modal.style.display = "none";
   }
 });
 
+// Affichage du mode d'édition
+
 function enableEditingMode() {
   const token = window.localStorage.getItem("accessToken");
 
   if (token == null) {
-    // user pas connecté
+    // User pas co
     console.log("Vous devez vous connecter d'abord");
   } else {
-    // le user est connecté
+    // User co
     console.log("Vous êtes connecté !");
 
     document.getElementById("edition-mode").style.display = "flex";
@@ -128,6 +139,8 @@ function enableEditingMode() {
     ) {
       element.style.display = "block";
     });
+
+    //Ajout du processus de logout
 
     document.getElementById("nav-login").style.display = "none";
     document.getElementById("nav-logout").style.display = "flex";
