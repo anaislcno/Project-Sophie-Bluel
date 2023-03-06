@@ -92,23 +92,27 @@ for (let i = 0; i < buttonHighlight.length; i++) {
 
 // Déclaration des const pour ouvrir/fermer la modale
 const modal = document.getElementById("modal1");
+const overlay = document.getElementById("overlay");
 const buttonModal = document.getElementById("btn-modal");
 const closeModal = document.getElementById("close");
 
 //  Apparition de la modale qd on clique s/ le bouton
 buttonModal.onclick = function () {
   modal.style.display = "flex";
+  overlay.style.display = "flex";
 };
 
 //La modale se ferme si on clique sur la croix
 closeModal.onclick = function () {
   modal.style.display = "none";
+  overlay.style.display = "none";
 };
 
 // La modale se ferme si on clique en dehors
 window.onclick = function (event) {
-  if (event.target == modal) {
+  if (event.target == overlay) {
     modal.style.display = "none";
+    overlay.style.display = "none";
   }
 };
 
@@ -116,6 +120,7 @@ window.onclick = function (event) {
 window.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     modal.style.display = "none";
+    overlay.style.display = "none";
   }
 });
 
@@ -155,10 +160,6 @@ function enableEditingMode() {
 enableEditingMode();
 
 // Grid modale
-
-// const reponse = await fetch("http://localhost:5678/api/works");
-// const works = await reponse.json();
-
 // Fonction qui génère toute la page web
 
 function generateWorksGrid(works) {
@@ -169,6 +170,7 @@ function generateWorksGrid(works) {
     const divEditGallery = document.querySelector("#edit-gallery");
     // Création d’une balise dédiée à un projet
     const worksElement = document.createElement("figure");
+    worksElement.classList.add("figure-element");
 
     // Création des balises
     const imageUrlElement = document.createElement("img");
@@ -177,13 +179,30 @@ function generateWorksGrid(works) {
     const titleElement = document.createElement("figcaption");
     titleElement.innerText = "éditer";
 
+    const buttonDelete = document.createElement("i");
+    buttonDelete.classList.add("fa-solid", "fa-trash-can", "btn-delete");
     // On rattache la balise article a la div
     divEditGallery.appendChild(worksElement);
     // On rattache l’image à la figure
+
     worksElement.appendChild(imageUrlElement);
     worksElement.appendChild(titleElement);
+    worksElement.appendChild(buttonDelete);
+
+    // Boutton de suppression
+    buttonDelete.onclick = function (event) {
+      const token = window.localStorage.getItem("accessToken");
+      event.preventDefault();
+      const deleteMethod = {
+        method: "DELETE",
+        headers: {
+          authorization: "Bearer " + token,
+        },
+      };
+      fetch("http://localhost:5678/api/works/" + article.id, deleteMethod);
+    };
   }
 }
 
-// Premier affichage de la page
+// Affichage de la page
 generateWorksGrid(works);

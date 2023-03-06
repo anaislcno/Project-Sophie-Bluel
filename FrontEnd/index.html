@@ -20,11 +20,11 @@
     <title>Sophie Bluel - Architecte d'intérieur</title>
   </head>
   <body>
+    <div id="edition-mode">
+      <p><i class="fa-regular fa-pen-to-square"></i>Mode édition</p>
+      <button class="cta-edition">publier les changements</button>
+    </div>
     <header>
-      <div id="edition-mode">
-        <p><i class="fa-regular fa-pen-to-square"></i>Mode édition</p>
-        <button class="cta-edition">publier les changements</button>
-      </div>
       <div class="nav-bar">
         <a href="index.html"
           ><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a
@@ -48,7 +48,10 @@
             <i class="fa-regular fa-pen-to-square"></i>Modifier
           </button>
         </figure>
-        <article>
+        <article id="pitch">
+          <button class="btn-modif">
+            <i class="fa-regular fa-pen-to-square"></i>Modifier
+          </button>
           <h2>Designer d'espace</h2>
           <p>
             Je raconte votre histoire, je valorise vos idées. Je vous accompagne
@@ -67,6 +70,7 @@
           </p>
         </article>
       </section>
+      <div id="overlay"></div>
       <section id="portfolio">
         <h2>Mes Projets</h2>
         <a href="#modal1" class="js-modal"
