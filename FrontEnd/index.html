@@ -78,18 +78,55 @@
             <i class="fa-regular fa-pen-to-square"></i>Modifier
           </button></a
         >
+
         <aside id="modal1" class="modal" role="dialog">
           <div class="modal-wrapper">
             <span id="close">&times;</span>
             <div id="modal-gallery">
               <h3>Galerie photo</h3>
               <div id="edit-gallery"></div>
+              <hr />
               <button id="cta-edit">Ajouter une photo</button>
               <p>Supprimer la galerie</p>
             </div>
+
             <div id="modal-add">
-              <span class="return">&#8592;</span>
-              <h3>Ajout photo</h3>
+              <img src="assets/icons/arrow-vector.svg" id="return" />
+              <div id="add-form">
+                <h3>Ajout photo</h3>
+                <form action="#" method="post">
+                  <div id="upload">
+                    <img
+                      src="assets/icons/img-vector.svg"
+                      alt="Image d'image"
+                    />
+                    <label class="file-upload">
+                      <input type="file" id="imageInput" />
+                      + Ajouter photo
+                    </label>
+                    <p>jpg, png : 4mo max</p>
+                    <!-- <button  onclick="uploadImage()">Upload Image</button> -->
+                  </div>
+                  <label for="title">Titre</label>
+                  <input
+                    class="input-shape"
+                    type="text"
+                    name="title"
+                    id="title"
+                  />
+                  <label for="cat-selection">Catégorie</label>
+                  <select class="input-shape" name="cat" id="cat-selection">
+                    <option value=""></option>
+                    <option value="Objets">Objets</option>
+                    <option value="Appartements">Appartements</option>
+                    <option value="Hotels & restaurants">
+                      Hôtels & restaurants
+                    </option>
+                  </select>
+                  <hr />
+                  <input type="submit" value="Valider" id="valid" />
+                </form>
+              </div>
             </div>
           </div>
         </aside>

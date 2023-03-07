@@ -88,25 +88,25 @@ const closeModal = document.getElementById("close");
 const modalAdd = document.getElementById("modal-add");
 
 //  Apparition de la modale qd on clique s/ le bouton
-buttonModal.onclick = function () {
+buttonModal.addEventListener("click", function () {
   modal.style.display = "flex";
   overlay.style.display = "flex";
   modalAdd.style.display = "none";
-};
+});
 
 //La modale se ferme si on clique sur la croix
-closeModal.onclick = function () {
+closeModal.addEventListener("click", function () {
   modal.style.display = "none";
   overlay.style.display = "none";
-};
+});
 
 // La modale se ferme si on clique en dehors
-window.onclick = function (event) {
+window.addEventListener("click", function (event) {
   if (event.target == overlay) {
     modal.style.display = "none";
     overlay.style.display = "none";
   }
-};
+});
 
 //La modale se ferme avec esc
 window.addEventListener("keydown", function (event) {
@@ -120,10 +120,18 @@ window.addEventListener("keydown", function (event) {
 const buttonNewProject = document.getElementById("cta-edit");
 const modalGallery = document.getElementById("modal-gallery");
 
-buttonNewProject.onclick = function () {
+buttonNewProject.addEventListener("click", function () {
   modalGallery.style.display = "none";
-  modalAdd.style.display = "flex";
-};
+  modalAdd.style.display = "block";
+});
+
+// Retour à la galerie modale
+const buttonReturn = document.getElementById("return");
+
+buttonReturn.addEventListener("click", function () {
+  modalGallery.style.display = "block";
+  modalAdd.style.display = "none";
+});
 
 // Affichage du mode d'édition
 
@@ -152,16 +160,16 @@ function enableEditingMode() {
 
     const logout = document.getElementById("nav-logout");
 
-    logout.onclick = function () {
+    logout.addEventListener("click", function () {
       window.localStorage.clear("accessToken");
-    };
+    });
   }
 }
 
 enableEditingMode();
 
 // Grid modale
-// Fonction qui génère toute la page web
+// Fonction qui génère
 
 function generateWorksGrid(works) {
   // Boucle pour tous les éléments
@@ -191,7 +199,7 @@ function generateWorksGrid(works) {
     worksElement.appendChild(buttonDelete);
 
     // Boutton de suppression
-    buttonDelete.onclick = function (event) {
+    buttonDelete.addEventListener("click", function (event) {
       const token = window.localStorage.getItem("accessToken");
       event.preventDefault();
       const deleteMethod = {
@@ -201,7 +209,7 @@ function generateWorksGrid(works) {
         },
       };
       fetch("http://localhost:5678/api/works/" + article.id, deleteMethod);
-    };
+    });
   }
 }
 
