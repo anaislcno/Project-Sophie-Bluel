@@ -32,7 +32,6 @@ generateWorks(works);
 
 // Filtres
 
-// Filtre : Tous
 const buttonAll = document.querySelector("#btn-all");
 
 buttonAll.addEventListener("click", function () {
@@ -40,52 +39,43 @@ buttonAll.addEventListener("click", function () {
   generateWorks(works);
 });
 
-// Filtre : Objects
-const buttonObjects = document.querySelector("#btn-object");
+//
+const listFilter = document.querySelector("#filter");
 
-buttonObjects.addEventListener("click", function () {
-  const worksObjectsFilter = works.filter(function (work) {
-    return work.category.name === "Objets";
+fetch("http://localhost:5678/api/categories")
+  .then((response) => response.json())
+  .then((filters) => {
+    for (let filter of filters) {
+      const btn = document.createElement("button");
+      btn.innerText = filter.name;
+      btn.classList.add("btn");
+
+      btn.addEventListener("click", function () {
+        const worksObjectsFilter = works.filter(function (work) {
+          return work.category.name === filter.name;
+        });
+
+        document.querySelector(".gallery").innerHTML = "";
+        generateWorks(worksObjectsFilter);
+      });
+
+      listFilter.appendChild(btn);
+      changeHighlight();
+    }
   });
-  document.querySelector(".gallery").innerHTML = "";
-  generateWorks(worksObjectsFilter);
-});
-
-// Filtre : Appartements
-const buttonAppart = document.querySelector("#btn-apt");
-
-buttonAppart.addEventListener("click", function () {
-  const worksAppartFilter = works.filter(function (work) {
-    return work.category.name === "Appartements";
-  });
-  document.querySelector(".gallery").innerHTML = "";
-  generateWorks(worksAppartFilter);
-});
-
-// Filtre : Hôtels/Restaurants
-const buttonHotel = document.querySelector("#btn-hotels");
-
-buttonHotel.addEventListener("click", function () {
-  const worksHotelFilter = works.filter(function (work) {
-    return work.category.name === "Hotels & restaurants";
-  });
-  document.querySelector(".gallery").innerHTML = "";
-  generateWorks(worksHotelFilter);
-});
 
 // Highlight sur le filtre sélectionné
-let buttonFilters = document.getElementById("filter");
-let buttonHighlight = buttonFilters.getElementsByClassName("btn");
+function changeHighlight() {
+  let buttonFilters = document.getElementById("filter");
+  let buttonHighlight = buttonFilters.getElementsByClassName("btn");
 
-for (let i = 0; i < buttonHighlight.length; i++) {
-  buttonHighlight[i].addEventListener("click", function () {
-    let buttonSelected = document.getElementsByClassName("active");
-    buttonSelected[0].className = buttonSelected[0].className.replace(
-      " active",
-      ""
-    );
-    this.className += " active";
-  });
+  for (let i = 0; i < buttonHighlight.length; i++) {
+    buttonHighlight[i].addEventListener("click", function () {
+      let buttonSelected = document.getElementsByClassName("active");
+      buttonSelected[0].classList.remove("active");
+      this.classList.add("active");
+    });
+  }
 }
 
 // MODALE --> Mise en place
@@ -95,11 +85,13 @@ const modal = document.getElementById("modal1");
 const overlay = document.getElementById("overlay");
 const buttonModal = document.getElementById("btn-modal");
 const closeModal = document.getElementById("close");
+const modalAdd = document.getElementById("modal-add");
 
 //  Apparition de la modale qd on clique s/ le bouton
 buttonModal.onclick = function () {
   modal.style.display = "flex";
   overlay.style.display = "flex";
+  modalAdd.style.display = "none";
 };
 
 //La modale se ferme si on clique sur la croix
@@ -123,6 +115,15 @@ window.addEventListener("keydown", function (event) {
     overlay.style.display = "none";
   }
 });
+
+// Formulaire modale
+const buttonNewProject = document.getElementById("cta-edit");
+const modalGallery = document.getElementById("modal-gallery");
+
+buttonNewProject.onclick = function () {
+  modalGallery.style.display = "none";
+  modalAdd.style.display = "flex";
+};
 
 // Affichage du mode d'édition
 

@@ -449,6 +449,7 @@ footer nav ul {
 	margin-right: 5px;
 }
 
+
 /* Modal gallery  */
 
 #edit-gallery {
@@ -474,7 +475,7 @@ footer nav ul {
 	margin: 3px 0px 5px 0px;
 }
 
-.cta-edit {
+#cta-edit {
 	font-family: 'Syne';
 	font-size: 14px;
 	cursor: pointer;
@@ -504,4 +505,20 @@ footer nav ul {
 	position: absolute;
 	right: 5px;
 	top: 5px;
+}
+
+/* Modal new project  */
+
+#modal-add {
+	display: flex;
+	justify-content: center;
+}
+
+.return {
+	float: left;
+	cursor: pointer;
+	position: relative;
+	left: 0px;
+	top: -25px;
+	font-size: 25px;
 }
