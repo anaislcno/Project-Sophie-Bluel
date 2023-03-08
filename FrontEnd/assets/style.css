@@ -562,6 +562,7 @@ hr {
 
 #upload {
 	display: flex;
+	position: relative;
 	flex-direction: column;
 	align-items: center;
 	padding-top: 30px;
@@ -572,7 +573,7 @@ hr {
 	margin-bottom: 30px;
 }
 
-#upload img {
+#img-img {
 	width: 60px;
 	height: 45px;
 }
@@ -596,4 +597,20 @@ hr {
 .file-upload input {
 	overflow: hidden;
 	width: 0;
-  }
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: url("../assets/icons/select.svg") no-repeat 95% center / 5%;
+}
+
+#preview {
+	display: none;
+	/* display: block; */
+    position: absolute;
+	margin-top: -30px;
+    height: 100%;
+    width: auto;
+}

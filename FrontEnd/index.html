@@ -94,14 +94,21 @@
               <img src="assets/icons/arrow-vector.svg" id="return" />
               <div id="add-form">
                 <h3>Ajout photo</h3>
-                <form action="#" method="post">
+                <form enctype="multipart/form-data" method="post">
                   <div id="upload">
+                    <img id="preview" src="#" alt="Votre photo" />
                     <img
+                      id="img-img"
                       src="assets/icons/img-vector.svg"
                       alt="Image d'image"
                     />
-                    <label class="file-upload">
-                      <input type="file" id="imageInput" />
+                    <label class="file-upload" id="hide">
+                      <input
+                        accept="image/*"
+                        type="file"
+                        id="imageInput"
+                        required
+                      />
                       + Ajouter photo
                     </label>
                     <p>jpg, png : 4mo max</p>
@@ -113,9 +120,15 @@
                     type="text"
                     name="title"
                     id="title"
+                    required
                   />
                   <label for="cat-selection">Catégorie</label>
-                  <select class="input-shape" name="cat" id="cat-selection">
+                  <select
+                    class="input-shape"
+                    name="cat"
+                    id="cat-selection"
+                    required
+                  >
                     <option value=""></option>
                     <option value="Objets">Objets</option>
                     <option value="Appartements">Appartements</option>

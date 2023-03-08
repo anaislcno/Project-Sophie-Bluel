@@ -215,3 +215,24 @@ function generateWorksGrid(works) {
 
 // Affichage de la page
 generateWorksGrid(works);
+
+// Visualition img formulaire
+
+imageInput.onchange = (evt) => {
+  const [file] = imageInput.files;
+  if (file) {
+    preview.src = URL.createObjectURL(file);
+  }
+  if (file != null) {
+    preview.style.display = "block";
+    const displayPreview = document.getElementById("hide");
+    displayPreview.style.display = "none";
+  }
+};
+
+// const displayPreview = document.getElementsByClassName("file-upload");
+// const hideBtn = document.getElementById("hide");
+
+// displayPreview.addEventListener("click", function () {
+//   hideBtn.style.display = "none";
+// });
