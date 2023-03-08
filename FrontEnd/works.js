@@ -127,10 +127,16 @@ buttonNewProject.addEventListener("click", function () {
 
 // Retour à la galerie modale
 const buttonReturn = document.getElementById("return");
+const resetForm = document.getElementById("form-content");
 
 buttonReturn.addEventListener("click", function () {
   modalGallery.style.display = "block";
   modalAdd.style.display = "none";
+  resetForm.reset();
+  document.getElementById("preview").src = "#";
+  document.getElementById("preview").alt = "";
+  const displayPreview = document.getElementById("hide");
+  displayPreview.style.display = "block";
 });
 
 // Affichage du mode d'édition
@@ -230,9 +236,24 @@ imageInput.onchange = (evt) => {
   }
 };
 
-// const displayPreview = document.getElementsByClassName("file-upload");
-// const hideBtn = document.getElementById("hide");
+// FORMULAIRE D'AJOUT
 
-// displayPreview.addEventListener("click", function () {
-//   hideBtn.style.display = "none";
-// });
+// var form = document.forms.namedItem("form-content");
+// form.addEventListener('submit', function(ev) {
+
+//   var oOutput = document.querySelector(""),
+//       oData = new FormData(form);
+
+//   var oReq = new XMLHttpRequest();
+//   oReq.open("POST", "http://localhost:5678/api/works/", true);
+//   oReq.onload = function(oEvent) {
+//     if (oReq.status == 200) {
+//       oOutput.innerHTML = "Envoyé!";
+//        } else {
+//       oOutput.innerHTML = "Erreur " + oReq.status + " lors de la tentative d’envoi du fichier.<br \/>";
+//     }
+//   };
+
+//   oReq.send(oData);
+//   ev.preventDefault();
+// }, false);

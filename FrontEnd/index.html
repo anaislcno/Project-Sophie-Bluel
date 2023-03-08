@@ -94,7 +94,11 @@
               <img src="assets/icons/arrow-vector.svg" id="return" />
               <div id="add-form">
                 <h3>Ajout photo</h3>
-                <form enctype="multipart/form-data" method="post">
+                <form
+                  enctype="multipart/form-data"
+                  method="post"
+                  id="form-content"
+                >
                   <div id="upload">
                     <img id="preview" src="#" alt="Votre photo" />
                     <img
@@ -122,11 +126,11 @@
                     id="title"
                     required
                   />
-                  <label for="cat-selection">Catégorie</label>
+                  <label for="category">Catégorie</label>
                   <select
                     class="input-shape"
-                    name="cat"
-                    id="cat-selection"
+                    name="category"
+                    id="category"
                     required
                   >
                     <option value=""></option>
