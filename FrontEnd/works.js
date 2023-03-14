@@ -41,10 +41,12 @@ buttonAll.addEventListener("click", function () {
 
 //
 const listFilter = document.querySelector("#filter");
+let listGlobalFilters = [];
 
 fetch("http://localhost:5678/api/categories")
   .then((response) => response.json())
   .then((filters) => {
+    listGlobalFilters = filters;
     for (let filter of filters) {
       const btn = document.createElement("button");
       btn.innerText = filter.name;
@@ -166,8 +168,10 @@ function enableEditingMode() {
 
     const logout = document.getElementById("nav-logout");
 
-    logout.addEventListener("click", function () {
+    logout.addEventListener("click", function (e) {
+      e.preventDefault();
       window.localStorage.clear("accessToken");
+      window.location = "index.html";
     });
   }
 }
@@ -206,8 +210,8 @@ function generateWorksGrid(works) {
 
     // Boutton de suppression
     buttonDelete.addEventListener("click", function (event) {
-      const token = window.localStorage.getItem("accessToken");
       event.preventDefault();
+      const token = window.localStorage.getItem("accessToken");
       const deleteMethod = {
         method: "DELETE",
         headers: {
@@ -238,6 +242,7 @@ imageInput.onchange = (evt) => {
 
 // FORMULAIRE D'AJOUT
 
+// ESSAI 1
 // var form = document.forms.namedItem("form-content");
 // form.addEventListener('submit', function(ev) {
 
@@ -257,3 +262,54 @@ imageInput.onchange = (evt) => {
 //   oReq.send(oData);
 //   ev.preventDefault();
 // }, false);
+
+//ESSAI 2
+// const form = document.getElementById("form-content");
+
+// form.addEventListener('submit', function (e) {
+//   e.preventDefault();
+
+//   const preSend = new FormData(form);
+//   const send = new URLSearchParams(preSend);
+
+//   console.log([...send]);
+
+//   fetch("http://localhost:5678/api/works/", {
+//     method: "POST",
+//     body: send,
+//   })
+
+// .then(res => res.json())
+// .then(data => console.log(data))
+// .catch(err => console.log(err));
+// })
+
+//ESSAI 3
+const form = document.getElementById("form-content");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const userFile = document.getElementById("imageInput").files[0];
+  const userTitle = document.getElementById("title").value;
+  const userCategory = document.getElementById("category").selectedIndex;
+  const token = window.localStorage.getItem("accessToken");
+  console.log(userCategory);
+  const formData = new FormData();
+  formData.append("image", userFile);
+  formData.append("title", userTitle);
+  formData.append("category", userCategory);
+
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      // "Content-Type": "multipart/form-data",
+      authorization: "Bearer " + token,
+    },
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+});
