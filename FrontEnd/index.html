@@ -106,6 +106,10 @@
                       src="assets/icons/img-vector.svg"
                       alt="Image d'image"
                     />
+                    <!-- <label class="label-input">
+                      <input type="file" required />
+                      <span>Select a file</span>
+                    </label> -->
                     <label class="file-upload" id="hide">
                       <input
                         accept="image/*"
@@ -113,10 +117,9 @@
                         id="imageInput"
                         required
                       />
-                      + Ajouter photo
+                      <span>+ Ajouter photo</span>
                     </label>
                     <p>jpg, png : 4mo max</p>
-                    <!-- <button  onclick="uploadImage()">Upload Image</button> -->
                   </div>
                   <label for="title">Titre</label>
                   <input
@@ -133,7 +136,7 @@
                     id="category"
                     required
                   >
-                    <option value="0"></option>
+                    <option></option>
                     <option value="1">Objets</option>
                     <option value="2">Appartements</option>
                     <option value="3">Hôtels & restaurants</option>

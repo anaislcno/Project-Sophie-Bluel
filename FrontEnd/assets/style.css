@@ -583,7 +583,11 @@ hr {
 	color: #444444;
 }
 
-.file-upload {
+.file-upload input {
+	position: relative;
+	text-indent:-9999px;	
+	font-size: 0;
+	line-height: 0;
 	cursor: pointer;
 	display: inline-block;
 	width: 175px;
@@ -591,12 +595,14 @@ hr {
 	border-radius: 50px;
 	padding-top: 10px;
 	background: #CBD6DC;
-	color: #306685;
 }
 
-.file-upload input {
-	overflow: hidden;
-	width: 0;
+.file-upload span {
+	position: absolute;
+	left: 155px;
+	bottom: 79px;
+	cursor: pointer;
+	color: #306685;
 }
 
 select {
