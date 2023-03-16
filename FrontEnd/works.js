@@ -88,6 +88,7 @@ const overlay = document.getElementById("overlay");
 const buttonModal = document.getElementById("btn-modal");
 const closeModal = document.getElementById("close");
 const modalAdd = document.getElementById("modal-add");
+const modalGallery = document.getElementById("modal-gallery");
 
 //  Apparition de la modale qd on clique s/ le bouton
 buttonModal.addEventListener("click", function () {
@@ -100,6 +101,7 @@ buttonModal.addEventListener("click", function () {
 closeModal.addEventListener("click", function () {
   modal.style.display = "none";
   overlay.style.display = "none";
+  modalGallery.style.display = "block";
 });
 
 // La modale se ferme si on clique en dehors
@@ -107,6 +109,7 @@ window.addEventListener("click", function (event) {
   if (event.target == overlay) {
     modal.style.display = "none";
     overlay.style.display = "none";
+    modalGallery.style.display = "block";
   }
 });
 
@@ -115,12 +118,12 @@ window.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     modal.style.display = "none";
     overlay.style.display = "none";
+    modalGallery.style.display = "block";
   }
 });
 
 // Formulaire modale
 const buttonNewProject = document.getElementById("cta-edit");
-const modalGallery = document.getElementById("modal-gallery");
 
 buttonNewProject.addEventListener("click", function () {
   modalGallery.style.display = "none";
