@@ -1,29 +1,103 @@
 const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
 
+// fonction qui ajoute une image a la gallery en donnant un titre et une image url
+function addToGallery(title, imageUrl, imageId) {
+  // Gallery Principale
+
+  const divGallery = document.querySelector(".gallery");
+  // Création d’une balise dédiée à un projet
+  const worksElement = document.createElement("figure");
+  worksElement.setAttribute("id", imageId);
+
+  // Création des balises
+  const imageUrlElement = document.createElement("img");
+  imageUrlElement.src = imageUrl;
+  imageUrlElement.alt = imageUrl;
+  const titleElement = document.createElement("figcaption");
+  titleElement.innerText = title;
+  // On rattache la balise article a la div
+  divGallery.appendChild(worksElement);
+  // On rattache l’image à la figure
+  worksElement.appendChild(imageUrlElement);
+  worksElement.appendChild(titleElement);
+
+  addToGalleryGrid(imageUrl, imageId);
+  // Gallery Grid
+}
+
+function addToGalleryGrid(imageUrl, imageId) {
+  const divEditGallery = document.querySelector("#edit-gallery");
+  // Création d’une balise dédiée à un projet
+  const worksElement = document.createElement("figure");
+  worksElement.classList.add("figure-element");
+  worksElement.setAttribute("id", imageId);
+
+  // Création des balises
+  const imageUrlElement = document.createElement("img");
+  imageUrlElement.src = imageUrl;
+  imageUrlElement.alt = imageUrl;
+  const titleElement = document.createElement("figcaption");
+  titleElement.innerText = "éditer";
+
+  const buttonDelete = document.createElement("i");
+  buttonDelete.classList.add("fa-solid", "fa-trash-can", "btn-delete");
+  // On rattache la balise article a la div
+  divEditGallery.appendChild(worksElement);
+  // On rattache l’image à la figure
+
+  worksElement.appendChild(imageUrlElement);
+  worksElement.appendChild(titleElement);
+  worksElement.appendChild(buttonDelete);
+
+  // Boutton de suppression
+  buttonDelete.addEventListener("click", function (event) {
+    event.preventDefault();
+    const token = window.localStorage.getItem("accessToken");
+    const deleteMethod = {
+      method: "DELETE",
+      headers: {
+        authorization: "Bearer " + token,
+      },
+    };
+    fetch("http://localhost:5678/api/works/" + imageId, deleteMethod).then(
+      () => {
+        console.log("On dois maintentant supprimer cette image");
+        console.log("image : ", imageUrl);
+        console.log("id : ", imageId);
+        removeFromGallery(imageId);
+      }
+    );
+  });
+}
+
+function removeFromGallery(imageId) {
+  document.getElementById(imageId).remove(); // supprimer ds gallery imageId + grid imageId
+}
 // Fonction qui génère toute la page web
 
 function generateWorks(works) {
   // Boucle pour tous les éléments
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
-    // Récupération de l'élément du DOM qui accueillera les fiches
-    const divGallery = document.querySelector(".gallery");
-    // Création d’une balise dédiée à un projet
-    const worksElement = document.createElement("figure");
+    addToGallery(article.title, article.imageUrl, article.id);
+    // // Récupération de l'élément du DOM qui accueillera les fiches
+    // const divGallery = document.querySelector(".gallery");
+    // // Création d’une balise dédiée à un projet
+    // const worksElement = document.createElement("figure");
 
-    // Création des balises
-    const imageUrlElement = document.createElement("img");
-    imageUrlElement.src = article.imageUrl;
-    imageUrlElement.alt = article.imageUrl;
-    const titleElement = document.createElement("figcaption");
-    titleElement.innerText = article.title;
+    // // Création des balises
+    // const imageUrlElement = document.createElement("img");
+    // imageUrlElement.src = article.imageUrl;
+    // imageUrlElement.alt = article.imageUrl;
+    // const titleElement = document.createElement("figcaption");
+    // titleElement.innerText = article.title;
 
-    // On rattache la balise article a la div
-    divGallery.appendChild(worksElement);
-    // On rattache l’image à la figure
-    worksElement.appendChild(imageUrlElement);
-    worksElement.appendChild(titleElement);
+    // // On rattache la balise article a la div
+    // divGallery.appendChild(worksElement);
+    // // On rattache l’image à la figure
+    // worksElement.appendChild(imageUrlElement);
+    // worksElement.appendChild(titleElement);
   }
 }
 
@@ -47,10 +121,16 @@ fetch("http://localhost:5678/api/categories")
   .then((response) => response.json())
   .then((filters) => {
     listGlobalFilters = filters;
-    for (let filter of filters) {
+
+    filters.forEach((filter, index) => {
+      //on boucle sur chaque filtre et on récupére l'index
       const btn = document.createElement("button");
       btn.innerText = filter.name;
       btn.classList.add("btn");
+
+      index = index + 1; // on incrémente l'index pour qu'il commence à 1
+      const selectElement = document.getElementById("category");
+      selectElement.add(new Option(filter.name, index));
 
       btn.addEventListener("click", function () {
         const worksObjectsFilter = works.filter(function (work) {
@@ -63,7 +143,7 @@ fetch("http://localhost:5678/api/categories")
 
       listFilter.appendChild(btn);
       changeHighlight();
-    }
+    });
   });
 
 // Highlight sur le filtre sélectionné
@@ -184,50 +264,50 @@ enableEditingMode();
 // Grid modale
 // Fonction qui génère
 
-function generateWorksGrid(works) {
-  // Boucle pour tous les éléments
-  for (let i = 0; i < works.length; i++) {
-    const article = works[i];
-    // Récupération de l'élément du DOM qui accueillera les fiches
-    const divEditGallery = document.querySelector("#edit-gallery");
-    // Création d’une balise dédiée à un projet
-    const worksElement = document.createElement("figure");
-    worksElement.classList.add("figure-element");
+// function generateWorksGrid(works) {
+//   // Boucle pour tous les éléments
+//   for (let i = 0; i < works.length; i++) {
+//     const article = works[i];
+//     // Récupération de l'élément du DOM qui accueillera les fiches
+//     const divEditGallery = document.querySelector("#edit-gallery");
+//     // Création d’une balise dédiée à un projet
+//     const worksElement = document.createElement("figure");
+//     worksElement.classList.add("figure-element");
 
-    // Création des balises
-    const imageUrlElement = document.createElement("img");
-    imageUrlElement.src = article.imageUrl;
-    imageUrlElement.alt = article.imageUrl;
-    const titleElement = document.createElement("figcaption");
-    titleElement.innerText = "éditer";
+//     // Création des balises
+//     const imageUrlElement = document.createElement("img");
+//     imageUrlElement.src = article.imageUrl;
+//     imageUrlElement.alt = article.imageUrl;
+//     const titleElement = document.createElement("figcaption");
+//     titleElement.innerText = "éditer";
 
-    const buttonDelete = document.createElement("i");
-    buttonDelete.classList.add("fa-solid", "fa-trash-can", "btn-delete");
-    // On rattache la balise article a la div
-    divEditGallery.appendChild(worksElement);
-    // On rattache l’image à la figure
+//     const buttonDelete = document.createElement("i");
+//     buttonDelete.classList.add("fa-solid", "fa-trash-can", "btn-delete");
+//     // On rattache la balise article a la div
+//     divEditGallery.appendChild(worksElement);
+//     // On rattache l’image à la figure
 
-    worksElement.appendChild(imageUrlElement);
-    worksElement.appendChild(titleElement);
-    worksElement.appendChild(buttonDelete);
+//     worksElement.appendChild(imageUrlElement);
+//     worksElement.appendChild(titleElement);
+//     worksElement.appendChild(buttonDelete);
 
-    // Boutton de suppression
-    buttonDelete.addEventListener("click", function (event) {
-      event.preventDefault();
-      const token = window.localStorage.getItem("accessToken");
-      const deleteMethod = {
-        method: "DELETE",
-        headers: {
-          authorization: "Bearer " + token,
-        },
-      };
-      fetch("http://localhost:5678/api/works/" + article.id, deleteMethod);
-    });
-  }
-}
+//     // Boutton de suppression
+//     buttonDelete.addEventListener("click", function (event) {
+//       event.preventDefault();
+//       const token = window.localStorage.getItem("accessToken");
+//       const deleteMethod = {
+//         method: "DELETE",
+//         headers: {
+//           authorization: "Bearer " + token,
+//         },
+//       };
+//       fetch("http://localhost:5678/api/works/" + article.id, deleteMethod);
+//     });
+//   }
+// }
 
-// Affichage de la page
-generateWorksGrid(works);
+// // Affichage de la page
+// generateWorksGrid(works);
 
 // Visualition img formulaire
 
@@ -249,7 +329,6 @@ const form = document.getElementById("form-content");
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-
   const userFile = document.getElementById("imageInput").files[0];
   const userTitle = document.getElementById("title").value;
   const userCategory = document.getElementById("category").selectedIndex;
@@ -270,6 +349,8 @@ form.addEventListener("submit", function (e) {
     body: formData,
   })
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      addToGallery(data.title, data.imageUrl, data.id);
+    })
     .catch((err) => console.log(err));
 });
