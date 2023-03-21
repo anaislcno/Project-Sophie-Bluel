@@ -1,14 +1,13 @@
 const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
 
+// Gallery Principale
 // F° pour ajouter une img avec un titre et une imageUrl
 function addToGallery(title, imageUrl, imageId) {
-  // Gallery Principale
-
   const divGallery = document.querySelector(".gallery");
   // Création d’une balise dédiée à un projet
   const worksElement = document.createElement("figure");
-  worksElement.setAttribute("id", imageId);
+  worksElement.setAttribute("id", "gallery-" + imageId);
 
   // Création des balises
   const imageUrlElement = document.createElement("img");
@@ -23,15 +22,15 @@ function addToGallery(title, imageUrl, imageId) {
   worksElement.appendChild(titleElement);
 
   addToGalleryGrid(imageUrl, imageId);
-  // Gallery Grid
 }
 
+// Gallery Grid
 function addToGalleryGrid(imageUrl, imageId) {
   const divEditGallery = document.querySelector("#edit-gallery");
   // Création d’une balise dédiée à un projet
   const worksElement = document.createElement("figure");
   worksElement.classList.add("figure-element");
-  worksElement.setAttribute("id", imageId);
+  worksElement.setAttribute("id", "grid-" + imageId);
 
   // Création des balises
   const imageUrlElement = document.createElement("img");
@@ -42,6 +41,9 @@ function addToGalleryGrid(imageUrl, imageId) {
 
   const buttonDelete = document.createElement("i");
   buttonDelete.classList.add("fa-solid", "fa-trash-can", "btn-delete");
+  // const buttonMove = document.createElement("i");
+  // buttonMove.classList.add("fa-solid", "fa-up-down-left-right");
+
   // On rattache la balise article a la div
   divEditGallery.appendChild(worksElement);
   // On rattache l’image à la figure
@@ -49,6 +51,7 @@ function addToGalleryGrid(imageUrl, imageId) {
   worksElement.appendChild(imageUrlElement);
   worksElement.appendChild(titleElement);
   worksElement.appendChild(buttonDelete);
+  // worksElement.appendChild(buttonMove);
 
   // Boutton de suppression
   buttonDelete.addEventListener("click", function (event) {
@@ -73,7 +76,8 @@ function addToGalleryGrid(imageUrl, imageId) {
 
 function removeFromGallery(imageId) {
   // Supprimer gallery imageId + grid imageId
-  document.getElementById(imageId).remove();
+  document.getElementById("grid-" + imageId).remove();
+  document.getElementById("gallery-" + imageId).remove();
 }
 // Fonction qui génère toute la page web
 
@@ -107,12 +111,12 @@ fetch("http://localhost:5678/api/categories")
     listGlobalFilters = filters;
 
     filters.forEach((filter, index) => {
-      //on boucle sur chaque filtre et on récupére l'index
+      //Boucle s/ chaque filtre et on récupére l'index
       const btn = document.createElement("button");
       btn.innerText = filter.name;
       btn.classList.add("btn");
 
-      index = index + 1; // on incrémente l'index pour qu'il commence à 1
+      index = index + 1; // On incrémente l'index pour qu'il commence à 1
       const selectElement = document.getElementById("category");
       selectElement.add(new Option(filter.name, index));
 
@@ -153,7 +157,6 @@ const buttonModal = document.getElementById("btn-modal");
 const closeModal = document.getElementById("close");
 const modalAdd = document.getElementById("modal-add");
 const modalGallery = document.getElementById("modal-gallery");
-const buttonValidate = document.getElementById("valid");
 
 //  Apparition de la modale qd on clique s/ le bouton
 buttonModal.addEventListener("click", function () {
@@ -164,13 +167,6 @@ buttonModal.addEventListener("click", function () {
 
 //La modale se ferme si on clique sur la croix
 closeModal.addEventListener("click", function () {
-  modal.style.display = "none";
-  overlay.style.display = "none";
-  modalGallery.style.display = "block";
-});
-
-// Fermeture lors de l'ajout d'un projet
-buttonValidate.addEventListener("click", function () {
   modal.style.display = "none";
   overlay.style.display = "none";
   modalGallery.style.display = "block";
@@ -275,31 +271,68 @@ imageInput.onchange = (evt) => {
 // FORMULAIRE D'AJOUT
 
 const form = document.getElementById("form-content");
+const buttonValidate = document.getElementById("valid");
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
+  if (validateForm()) {
+    const userFile = document.getElementById("imageInput").files[0];
+    const userTitle = document.getElementById("title").value;
+    const userCategory = document.getElementById("category").selectedIndex;
+    const token = window.localStorage.getItem("accessToken");
+    console.log(userCategory);
+    const formData = new FormData();
+    formData.append("image", userFile);
+    formData.append("title", userTitle);
+    formData.append("category", userCategory);
+
+    fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        // "Content-Type": "multipart/form-data",
+        authorization: "Bearer " + token,
+      },
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        addToGallery(data.title, data.imageUrl, data.id);
+        modal.style.display = "none";
+        overlay.style.display = "none";
+        modalGallery.style.display = "block";
+      })
+      .catch((err) => console.log(err));
+  }
+});
+
+// Fonction qui check la validité du form
+function validateForm() {
   const userFile = document.getElementById("imageInput").files[0];
   const userTitle = document.getElementById("title").value;
-  const userCategory = document.getElementById("category").selectedIndex;
-  const token = window.localStorage.getItem("accessToken");
-  console.log(userCategory);
-  const formData = new FormData();
-  formData.append("image", userFile);
-  formData.append("title", userTitle);
-  formData.append("category", userCategory);
+  const userCategory = document.getElementById("category").value;
+  if (userFile === undefined || userTitle === "" || userCategory === "") {
+    // alert("Veuillez remplir tous les champs");
+    return false;
+  }
+  return true;
+}
 
-  fetch("http://localhost:5678/api/works", {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      // "Content-Type": "multipart/form-data",
-      authorization: "Bearer " + token,
-    },
-    body: formData,
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      addToGallery(data.title, data.imageUrl, data.id);
-    })
-    .catch((err) => console.log(err));
-});
+// Bouton "déplacer" les images dans la gallerie modale qui s'affiche au hover
+const figuresGrid = document.getElementsByClassName("figure-element");
+
+for (let i = 0; i < figuresGrid.length; i++) {
+  const figure = figuresGrid[i];
+  figure.addEventListener("mouseenter", () => {
+    const buttonMove = document.createElement("i");
+    buttonMove.classList.add("fa-solid", "fa-up-down-left-right");
+    figure.appendChild(buttonMove);
+  });
+
+  figure.addEventListener("mouseleave", () => {
+    const buttonMove = figure.querySelector(".fa-up-down-left-right");
+    if (buttonMove) {
+      figure.removeChild(buttonMove);
+    }
+  });
+}

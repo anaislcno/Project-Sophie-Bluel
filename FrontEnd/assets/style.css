@@ -512,6 +512,22 @@ hr {
 	top: 5px;
 }
 
+.fa-up-down-left-right {
+	color: white;
+	cursor: pointer;
+	font-size: 8px;
+	padding: 3px 2px 2px 3px;
+	border-radius: 2px;
+	height: 10px;
+	width: 10px;
+	text-align: center;
+	background-color: black;
+	position: absolute;
+	right: 25px;
+	top: 5px;
+}
+
+
 /* Modal new project  */
 
 #add-form {
