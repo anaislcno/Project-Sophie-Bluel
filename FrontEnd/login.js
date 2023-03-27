@@ -30,9 +30,7 @@ loginForm.addEventListener("submit", async function (event) {
       }
 
       // Status est forcémment == 200
-      console.log(
-        "Bravo tu as réussi ta requête, tu peux récupérer tes données"
-      );
+      console.log("Requête réussie, tu peux récupérer tes données");
 
       const jsonResponse = await result.json(); // Récupération données réponse
 

@@ -41,17 +41,13 @@ function addToGalleryGrid(imageUrl, imageId) {
 
   const buttonDelete = document.createElement("i");
   buttonDelete.classList.add("fa-solid", "fa-trash-can", "btn-delete");
-  // const buttonMove = document.createElement("i");
-  // buttonMove.classList.add("fa-solid", "fa-up-down-left-right");
 
   // On rattache la balise article a la div
   divEditGallery.appendChild(worksElement);
   // On rattache l’image à la figure
-
   worksElement.appendChild(imageUrlElement);
   worksElement.appendChild(titleElement);
   worksElement.appendChild(buttonDelete);
-  // worksElement.appendChild(buttonMove);
 
   // Boutton de suppression
   buttonDelete.addEventListener("click", function (event) {
@@ -79,8 +75,8 @@ function removeFromGallery(imageId) {
   document.getElementById("grid-" + imageId).remove();
   document.getElementById("gallery-" + imageId).remove();
 }
-// Fonction qui génère toute la page web
 
+// Fonction qui génère toute la page web
 function generateWorks(works) {
   // Boucle pour tous les éléments
   for (let i = 0; i < works.length; i++) {
@@ -148,7 +144,7 @@ function changeHighlight() {
   }
 }
 
-// MODALE --> Mise en place
+// MODALE
 
 // Déclaration des const pour ouvrir/fermer la modale
 const modal = document.getElementById("modal1");
@@ -228,9 +224,7 @@ function enableEditingMode() {
   } else {
     // User co
     console.log("Vous êtes connecté !");
-
     document.getElementById("edition-mode").style.display = "flex";
-
     Array.from(document.getElementsByClassName("btn-modif")).forEach(function (
       element
     ) {
@@ -290,7 +284,6 @@ form.addEventListener("submit", function (e) {
       method: "POST",
       headers: {
         accept: "application/json",
-        // "Content-Type": "multipart/form-data",
         authorization: "Bearer " + token,
       },
       body: formData,
@@ -312,7 +305,6 @@ function validateForm() {
   const userTitle = document.getElementById("title").value;
   const userCategory = document.getElementById("category").value;
   if (userFile === undefined || userTitle === "" || userCategory === "") {
-    // alert("Veuillez remplir tous les champs");
     return false;
   }
   return true;
