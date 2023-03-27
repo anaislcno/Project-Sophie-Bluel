@@ -267,6 +267,14 @@ imageInput.onchange = (evt) => {
 const form = document.getElementById("form-content");
 const buttonValidate = document.getElementById("valid");
 
+form.addEventListener("input", function () {
+  if (validateForm()) {
+    buttonValidate.id = "validate-true";
+  } else {
+    buttonValidate.id = "valid";
+  }
+});
+
 form.addEventListener("submit", function (e) {
   e.preventDefault();
   if (validateForm()) {

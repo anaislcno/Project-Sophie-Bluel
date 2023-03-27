@@ -249,7 +249,7 @@ figcaption {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"].cta-contact{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -555,6 +555,34 @@ hr {
     border-radius: 60px;
     padding: 10px 0px;
 	width: 235px;
+    margin: 5px 0px 20px 0px;
+	align-self: center;
+}
+
+input[type="submit"] #valid-true {
+	font-family: 'Syne';
+	font-size: 14px;
+	cursor: pointer;
+	background-color: #1D6154;
+	color: white;
+	border: 1px solid #1D6154;
+    border-radius: 60px;
+    padding: 10px 0px !important;
+	width: 235px !important;
+    margin: 5px 0px 20px 0px;
+	align-self: center;
+}
+
+input[type="submit"] {
+	font-family: 'Syne';
+	font-size: 14px;
+	cursor: pointer;
+	background-color: #1D6154;
+	color: white;
+	border: 1px solid #1D6154;
+    border-radius: 60px;
+    padding: 10px 0px !important;
+	width: 235px !important;
     margin: 5px 0px 20px 0px;
 	align-self: center;
 }
