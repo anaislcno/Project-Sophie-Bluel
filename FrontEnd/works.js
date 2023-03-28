@@ -193,6 +193,7 @@ buttonNewProject.addEventListener("click", function () {
   modalGallery.style.display = "none";
   modalAdd.style.display = "block";
   resetForm.reset();
+  document.getElementById("valid-true").id = "valid";
   document.getElementById("preview").src = "#";
   document.getElementById("preview").alt = "";
   const displayPreview = document.getElementById("hide");
@@ -207,6 +208,7 @@ buttonReturn.addEventListener("click", function () {
   modalGallery.style.display = "block";
   modalAdd.style.display = "none";
   resetForm.reset();
+  document.getElementById("valid-true").id = "valid";
   document.getElementById("preview").src = "#";
   document.getElementById("preview").alt = "";
   const displayPreview = document.getElementById("hide");
@@ -269,7 +271,7 @@ const buttonValidate = document.getElementById("valid");
 
 form.addEventListener("input", function () {
   if (validateForm()) {
-    buttonValidate.id = "validate-true";
+    buttonValidate.id = "valid-true";
   } else {
     buttonValidate.id = "valid";
   }
